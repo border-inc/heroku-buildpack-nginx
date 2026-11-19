@@ -10,8 +10,8 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 BUILDPACK_DIR="$(dirname "$(dirname "$0")")"
 
-ruby_version="3.2.4"
-if [[ $STACK == heroku-2[02] ]]; then
+ruby_version="4.0.2"
+if [[ $STACK == "heroku-22" ]]; then
 	nginx_tarball=nginx-${STACK}.tgz
 	ruby_tarball=${STACK}/ruby-${ruby_version}.tgz
 else
@@ -35,7 +35,7 @@ echo "-----> nginx-buildpack: Installed ${nginx_version} to app/bin"
 # our own copy of Ruby and ensure it's on PATH at runtime.
 if ! command -v erb &> /dev/null; then
   echo "-----> nginx-buildpack: An existing Ruby installation was not found (required for erb template support)"
-  ruby_url="https://heroku-buildpack-ruby.s3.us-east-1.amazonaws.com/${ruby_tarball}"
+  ruby_url="https://heroku-buildpack-ruby.s3.dualstack.us-east-1.amazonaws.com/${ruby_tarball}"
   vendored_ruby_dir=".heroku-buildpack-nginx/ruby"
   mkdir -p "${BUILD_DIR}/${vendored_ruby_dir}"
 

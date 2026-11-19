@@ -13,8 +13,8 @@ Nginx-buildpack installs & runs the [Nginx web server](https://nginx.org/) insid
 ## Features
 
 * Presets for specific use-cases
-	- [Static sites](static.md)
-	- [Local proxy to app servers](proxy.md)
+	- [Static sites](STATIC.md)
+	- [Local proxy to app servers](PROXY.md)
 * Complete control of Nginx config in `config/nginx.conf.erb`
 	- [`erb` template](https://github.com/ruby/erb) supports dynamic config at start-up
 	- see [Nginx docs](https://nginx.org/en/docs/)
@@ -25,29 +25,29 @@ Nginx-buildpack installs & runs the [Nginx web server](https://nginx.org/) insid
 
 These are auto-selected based on the app's stack at build time.
 
-| Heroku Stack | Nginx Version | PCRE version |
+| [Heroku Stack](https://devcenter.heroku.com/articles/stack) | Nginx Version | PCRE version |
 |--------------|--------------:|-------------:|
-| `Heroku-20` | `1.26.1` | PCRE1 (8.x) |
-| `Heroku-22` | `1.26.1` | PCRE1 (8.x) |
-| `Heroku-24` | `1.26.1` | PCRE2 (10.x) |
+| [Heroku-22](https://devcenter.heroku.com/articles/heroku-22-stack) | 1.30.7 | PCRE1 (8.x) |
+| [Heroku-24](https://devcenter.heroku.com/articles/heroku-24-stack) | 1.30.7 | PCRE2 (10.x) |
+| [Heroku-26](https://devcenter.heroku.com/articles/heroku-26-stack) | 1.30.7 | PCRE2 (10.x) |
 
 ## Presets
 
 With Nginx's flexibility, it can be configured & used for many different purposes. See the documentation for the mode you wish to use.
 
-### [Static sites](static.md)
+### [Static sites](STATIC.md)
 
-HTTP server for websites and single page apps. [[docs](static.md)]
+HTTP server for websites and single page apps. [[docs](STATIC.md)]
 
-### [Local proxy](proxy.md)
+### [Local proxy](PROXY.md)
 
-HTTP proxy to an app server running in the same dyno, via UNIX domain sockets. [[docs](proxy.md)]
+HTTP proxy to an app server running in the same dyno, via UNIX domain sockets. [[docs](PROXY.md)]
 
 _Proxy is the original buildpack mode that is enabled by default, if the `config/nginx.conf.erb` file is not added to app source._
 
 ### Solo mode (deprecated)
 
-This mode has been superceeded by [Static mode](static.md).
+This mode has been superceeded by [Static mode](STATIC.md).
 
 ## Custom Nginx usage
 
@@ -121,7 +121,11 @@ Revise the version variables in `scripts/build_nginx`, and then run the builds i
 $ make build
 ```
 
-Then, commit & pull-request the resulting changes.
+Then:
+
+1. Update the Nginx versions in the [Nginx versions](#nginx-versions) table above.
+2. Add an entry for each upgraded dependency to the **[unreleased]** section of `CHANGELOG.md`.
+3. Commit & pull-request the resulting changes.
 
 ### Upgrading Ruby
 
@@ -130,3 +134,17 @@ _Ruby versions are downloaded from heroku-buildpack-ruby's distribution site. On
 Revise the `ruby_version` variable in `bin/compile`.
 
 Then, commit & pull-request the resulting changes.
+
+## Releasing a New Version
+
+_Only maintainers of this buildpack can make releases._
+
+_Replace "X.X" with the new version number._
+
+1. Update `CHANGELOG.md`, moving the **[unreleased] - YYYY-MM-DD** section contents into a new version section for version X.X
+2. Create a branch `prepare-release` with PR **Prepare release X.X**
+3. Get the PR approved
+4. Merge the approved PR
+5. Create a new [GitHub release](https://github.com/heroku/heroku-buildpack-nginx/releases) for the new version, targetting `main`, with name and tag of form `vX.Y`.
+6. Publish a new release in the Heroku Buildpack Registry, using either [plugin-buildpack-registry](https://github.com/heroku/plugin-buildpack-registry) and `heroku buildpacks:publish heroku-community/nginx <git_tag>`, or else the [buildpacks dashboard](https://addons-next.heroku.com/buildpacks/cf2713a5-65d0-4bc8-8dd2-b00d8d4f03f4/publish).
+
