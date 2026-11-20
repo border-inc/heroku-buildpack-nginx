@@ -4,7 +4,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased] - XXXX-XX-XX
+## [unreleased] - YYYY-MM-DD
+
+## [1.22] - 2026-11-19
+### Changes
+- Update nginx from 1.30.6 to 1.30.7. ([#169](https://github.com/heroku/heroku-buildpack-nginx/pull/169))
+
+## [1.21] - 2026-11-12
+### Changes
+- Update nginx from 1.30.5 to 1.30.6. ([#165](https://github.com/heroku/heroku-buildpack-nginx/pull/165))
+- Update headers-more-nginx-module from 0.40 to 0.41. ([#165](https://github.com/heroku/heroku-buildpack-nginx/pull/165))
+
+## [1.20] - 2026-09-24
+### Changes
+- nginx is now compiled with `ngx_http_stub_status_module` enabled, so apps can expose nginx connection/request metrics via the `stub_status` directive (e.g. for Datadog or Prometheus). ([#156](https://github.com/heroku/heroku-buildpack-nginx/pull/156))
+- Update nginx from 1.30.4 to 1.30.5. ([#163](https://github.com/heroku/heroku-buildpack-nginx/pull/163))
+- Update headers-more-nginx-module from 0.39 to 0.40. ([#163](https://github.com/heroku/heroku-buildpack-nginx/pull/163))
+
+## [1.19] - 2026-09-03
+### Changes
+- Update nginx from 1.30.2 to 1.30.4.
+
+## [1.18] - 2026-05-26
+### Changes
+- Update nginx from 1.28.3 to 1.30.2.
+
+## [1.17] - 2026-04-14
+### Changes
+- Add support for Heroku-26.
+- Update nginx from 1.28.0 to 1.28.3.
+- Update headers-more-nginx-module from 0.38 to 0.39.
+- Update Ruby from 3.2.8 to 4.0.2.
+
+## [1.16] - 2026-02-26
+### Changes
+- Changed the S3 URLs used for downloads to use AWS' dual-stack (IPv6 compatible) endpoint.
+
+## [1.15] - 2025-07-21
+### Changes
+- `start-nginx-static` now crashes when misconfigured
+
+## [1.14] - 2025-06-30
+### Changes
+- Drop support for heroku-20
+- Update Nginx to 1.28.0
+- Update headers-more-nginx-module to 0.38
+- Update Ruby to 3.2.8
+
+## [1.13] - 2024-08-30
+### Changes
+- Update Nginx to 1.26.2
+
+## [1.12] - 2024-06-06
 ### Changes
 - Update Nginx to 1.26.1
 
